@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int helper(int start,string s,int k,int end)
+    int helper(int start,string &s,int k,int end)
     {
         if(start>=end || k>(end-start))
             return 0;

@@ -1,40 +1,34 @@
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
-        
-        int z=nums.size();
-        
-        vector<int> zero;
-        for(int i=0;i<z;i++)
-        {
-            
-            if(nums[i]==0)
-                zero.push_back(i);
-        }
-        
-        if(zero.size()==0)
+    bool helper(vector<int>& nums,int i,int *dp)
+    {
+        if(i==nums.size()-1)
             return true;
-        else
+        if(i>=nums.size())
+            return false;
+        if(nums[i]==0)
+            return false;
+        
+        if(dp[i]!=-1)
+            return dp[i];
+        bool ans=false;
+        for(int j=1;j<=nums[i];j++)
         {
-            for(auto x:zero)
-            {
-                int flag=0;
-                int j=x-1;
-                
-                if(x==z-1)
-                    return true;
-                
-                while(j>=0)
-                {
-                    if(nums[j]>x-j)
-                        flag=1;
-                    j--;
-                }
-                if(flag==0)
-                return false;
+            ans=helper(nums,j+i,dp);
+            if(ans)
+           {
+                dp[i]=ans;
+                return ans;
             }
         }
-        
-        return true;
+        dp[i]=false;
+        return false;
+    }
+    bool canJump(vector<int>& nums) {
+        int n=nums.size();
+        int *dp=new int[n];
+        for(int i=0;i<n;i++)
+            dp[i]=-1;
+        return helper(nums,0,dp);
     }
 };

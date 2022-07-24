@@ -1,27 +1,29 @@
 class Solution {
 public:
-   
-    int helper(vector<int>& nums, int target,int i,bool used)
+    int helper(int i,int target,vector<int> &nums)
     {
-       
-        if(target==0 && i==nums.size())
-            {
+        if(i==nums.size() && target==0)
             return 1;
-            }     
-        
-        
         if(i>=nums.size())
             return 0;
+        // if(dp[i][target]!=-1)
+        //     return dp[i][target];
         
-        int count=0;
-        count+=helper(nums,target+nums[i],i+1,true);
-        count+=helper(nums,target-nums[i],i+1,true);
+        return helper(i+1,target-nums[i],nums)+helper(i+1,target+nums[i],nums);
+        // return dp[i][target];
         
-        // cout<<i<<" "<<count<<"\n";
-        return count;
+        
     }
     int findTargetSumWays(vector<int>& nums, int target) {
-        bool used=false;   
-        return helper(nums,target,0,used);
+        int n=nums.size();
+        // int **dp=new int*[n+1];
+        
+        // for(int i=0;i<=n;i++)
+        // {
+        //     dp[i]=new int[target+1];
+        //     for(int j=0;j<=target;j++)
+        //         dp[i][j]=-1;
+        // }
+        return helper(0,target,nums);
     }
 };

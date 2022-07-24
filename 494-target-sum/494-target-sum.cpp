@@ -6,24 +6,16 @@ public:
             return 1;
         if(i>=nums.size())
             return 0;
-        // if(dp[i][target]!=-1)
-        //     return dp[i][target];
         
-        return helper(i+1,target-nums[i],nums)+helper(i+1,target+nums[i],nums);
-        // return dp[i][target];
+        int cnt1,cnt2;
+        cnt1=helper(i+1,target-nums[i],nums);
+        cnt2=helper(i+1,target+nums[i],nums);
+        return cnt1+cnt2;
         
         
     }
     int findTargetSumWays(vector<int>& nums, int target) {
         int n=nums.size();
-        // int **dp=new int*[n+1];
-        
-        // for(int i=0;i<=n;i++)
-        // {
-        //     dp[i]=new int[target+1];
-        //     for(int j=0;j<=target;j++)
-        //         dp[i][j]=-1;
-        // }
         return helper(0,target,nums);
     }
 };

@@ -14,20 +14,20 @@ public:
         
         if(head==NULL || head->next==NULL)
             return head;
-        ListNode* temp=head->next;
-        ListNode* temp1=head;
-        temp1->next=NULL;
+        ListNode* tmp=NULL;
         
-        while(temp->next!=NULL)
+        while(head)
         {
-            ListNode* a=temp->next;
-            temp->next=temp1;
-            temp1=temp;
-            temp=a;
+            ListNode* emp=head->next;
+            head->next=tmp;
+            tmp=head;
+            if(emp)
+            head=emp;
+            else
+                return head;
+            
         }
-        temp->next=temp1;
-        return temp;
-        
+        return head;
         
     }
 };

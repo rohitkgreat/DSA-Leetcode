@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select employee_id from (select e.employee_id,e.name,s.salary from Employees as e left join salaries as s on s.employee_id=e.employee_id union select s.employee_id,s.salary,e.name from Employees as e right join salaries as s on s.employee_id=e.employee_id) as t where t.name is NULL or t.salary is NULL order by t.employee_id;

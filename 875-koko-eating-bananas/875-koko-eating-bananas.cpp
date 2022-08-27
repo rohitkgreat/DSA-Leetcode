@@ -1,60 +1,43 @@
 class Solution {
 public:
-    bool check(int mid,vector<int> &piles,int h)
+    bool check(vector<int> piles,int h,int mid)
     {
-        if(mid==0)
-            return false;
-        int ans=0;
-        // cout<<mid<<" ";
-        for(auto x:piles)
+        int cur=0;
+        for(int i=0;i<piles.size();i++)
         {
-            if(mid>=x)
-                ans++;
-            else
+            if(mid>=piles[i])
+                cur++;
+            else if(piles[i]>mid)
             {
-                if(x%mid==0)
-                    ans+=x/mid;
-                else
-                    ans+=x/mid +1;
+                cur+=piles[i]/mid;
+                if(piles[i]%mid!=0)
+                    cur++;
             }
+            if(cur>h)
+                return false;
         }
-        if(ans<=h)
-            return true;
+        return true;
         
-        return false;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
-        long long sum=0;
-        
-        sort(piles.begin(),piles.end());
+        int start=1;
         int mx=-1;
-        for(auto x:piles){
-            sum+=x; 
-            mx=max(mx,x);
-        }
+        for(auto z:piles)
+            mx=max(mx,z);
         
-        int n=piles.size();
-        
-        int mn=sum/h;
-       // cout<<"*";
-        
-        int start=mn,end=mx;
+        int end=mx;
         int ans;
         while(start<=end)
         {
             int mid=(start+end)/2;
-          
-            if(check(mid,piles,h))
+            if(check(piles,h,mid))
             {
                 ans=mid;
                 end=mid-1;
             }
             else
-            {
                 start=mid+1;
-            }
         }
-        
         return ans;
     }
 };

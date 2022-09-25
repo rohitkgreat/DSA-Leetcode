@@ -2,8 +2,8 @@ class Solution{
 public:
     vector<int> goodIndices(vector<int>& a, int k) {
         int n=a.size();
-        vector<int> pre(n+1,1);
-        vector<int> suf(n+1,1);
+        vector<int> pre(n,1);
+        vector<int> suf(n,1);
         vector<int> ans;
         for(int i=1;i<n;i++)
         {

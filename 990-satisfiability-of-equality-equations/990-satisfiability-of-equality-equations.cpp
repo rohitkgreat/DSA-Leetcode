@@ -3,7 +3,7 @@ public:
     int check[26];
     int find(int x)
     {
-        return check[x]==x?x:(check[x]=find(check[x]));    
+        return check[x]==x?x:(find(check[x]));    
     }
     bool equationsPossible(vector<string>& equations) {
     
@@ -23,8 +23,8 @@ public:
                 if(check[find(z[0]-'a')]==check[find(z[3]-'a')])
                 return false;
         }
-        // for(int i=0;i<5;i++)
-        //     cout<<check[i]<<" ";
+        for(int i=0;i<5;i++)
+            cout<<check[i]<<" ";
         
         return true;
     }
